@@ -1,93 +1,85 @@
 #pragma once
-#include<exception>
-#include<vector>
 #include<string>
 #include<fstream>
+#include<vector>
 #include"Userdata.h"
 class FileRW
 {
-public:
-
+protected:
 	static bool isStringInLine(std::string s1, std::string s2)
 	{
 		if (s2.find(s1) != std::string::npos) return true;
 		return false;
 	}
 
-	static Userdata readUserdataFromFile(std::string username,  std::string path = "users.txt")
+	static bool isLineInFile(std::string content, std::string path)
 	{
 		std::ifstream file(path);
-		if (!file.is_open()) throw "readUserdataFromFile: Plik nie zostal otwarty";
+		if (!file.is_open()) throw  std::string(__func__ + (std::string)": Plik nie zostal otwarty");
 		else
 		{
-			std::string content;
-			Userdata userdata;
-			while (file >> content)
+			std::string line;
+			while (file >> line)
 			{
-				int pos = content.find_first_of(";");
-				if (content.substr(0, pos) == username)
-				{
-					userdata.username = content.substr(0, pos);
-					userdata.password = content.substr(pos + 1);
-				}
-			}
-			file.close();
-			return userdata;
-		}
-	}
-
-	static bool usernameInUse(Userdata userdata , std::string path = "users.txt")
-	{
-		std::ifstream file(path);
-		if (!file.is_open()) throw "usernameInUse: Plik nie zostal otwarty";
-		else
-		{
-			std::string content;
-			while (file >> content)
-			{
-				if (isStringInLine(userdata.username, content))
+				if (content.find(content) != std::string::npos)
 				{
 					file.close();
 					return true;
 				}
 			}
-			file.close();
-			return false;
 		}
+		return false;
 	}
 
-	static void addUserdataToFile(Userdata userdata, std::string path = "users.txt")
+	static void insertLine(std::string content, std::string path)
 	{
 		std::ofstream file(path, std::ios_base::app);
-		if (!file.is_open()) throw "addUserdataToFile: Plik nie zostal otwarty";
+		if (!file.is_open()) throw  std::string(__func__ + (std::string)": Plik nie zostal otwarty");
 		else
 		{
-			file << userdata.formatUserdata();
+			file << content;
 			file.close();
 		}
+
 	}
 
-	static void deleteUserdata(Userdata userdata, std::string path = "users.txt")
+	static std::vector<std::string> getLines(std::string content, std::string path)
 	{
-		std::string line;
 		std::ifstream file;
-
 		file.open(path);
-		if (!file.is_open()) throw "eraseUserdata: Plik nie zostal otworzony";
+		std::vector<std::string> ret;
+		if (!file.is_open()) throw  std::string(__func__ + (std::string)": Plik nie zostal otwarty");
 		else
 		{
-			std::ofstream temp;
-			temp.open("temp.txt");
-
-			while (file >> line) 
+			std::string line;
+			while (file >> line)
 			{
-				if (line != userdata.formatUserdata())
-					temp << line << std::endl;
+				if (isStringInLine(content, line))
+				{
+					ret.push_back(line);
+				}
 			}
-
-			temp.close();
-			file.close();
 		}
+		return ret;
+	}
+
+	static void deleteLine(std::string content, std::string path)
+	{
+		std::ifstream file;
+		file.open(path);
+		std::ofstream temp;
+		temp.open("temp.txt");
+		if (!file.is_open() || !temp.is_open()) throw  std::string(__func__ + (std::string)": Plik nie zostal otwarty");
+		else
+		{
+			std::string line;
+			while (file >> line)
+			{
+				if (!isStringInLine(line, content)) temp << line << std::endl;
+			}
+		}
+		temp.close();
+		file.close();
 
 		const char* p = path.c_str();
 		remove(p);

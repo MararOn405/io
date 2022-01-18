@@ -142,10 +142,14 @@
     <ClCompile Include="io.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Account.h" />
     <ClInclude Include="FileRW.h" />
+    <ClInclude Include="Message.h" />
+    <ClInclude Include="MessageSystem.h" />
     <ClInclude Include="Userdata.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="messages.txt" />
     <Text Include="users.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
