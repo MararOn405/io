@@ -3,19 +3,21 @@
 #include "FileRW.h"
 class Account : private FileRW 
 {
-private:
-	static std::string formatData(Userdata userdata)
-	{
-		return userdata.username + ";" + userdata.password;
-	}
 
 public:
 	static bool isDataValid(Userdata userdata)
 	{
-		if (userdata.username.length() < 3) throw  std::string("Nazwa uzytkownika jest za krotka.\n");
-		else if (userdata.password.length() < 6) throw  std::string("Haslo jest za krotkie.\n");
-		else return true;
-		return false;
+		if (userdata.username.length() < 3)
+		{
+			throw  std::string("Nazwa uzytkownika jest za krotka.\n");
+			return false;
+		}
+		if (userdata.password.length() < 6)
+		{
+			throw  std::string("Haslo jest za krotkie.\n");
+			return false;
+		}
+		return true;
 	}
 
 	static bool isUsernameInUse(Userdata userdata)
@@ -33,7 +35,7 @@ public:
 	{
 		if (isDataValid(userdata) && !isUsernameInUse(userdata))
 		{
-			insertLine(formatData(userdata), "users.txt");
+			insertLine(userdata.formatUserdata(), "users.txt");
 			return true;
 		}
 		return false;
@@ -41,7 +43,7 @@ public:
 
 	static bool logIn(Userdata userdata)
 	{
-		std::string line = formatData(userdata);
+		std::string line = userdata.formatUserdata();
 		if (isLineInFile(line, "users.txt")) return true;
 		return false;
 	}

@@ -5,7 +5,7 @@
 #include"Userdata.h"
 class FileRW
 {
-protected:
+public:
 	static bool isStringInLine(std::string s1, std::string s2)
 	{
 		if (s2.find(s1) != std::string::npos) return true;
