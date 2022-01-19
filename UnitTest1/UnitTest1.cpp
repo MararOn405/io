@@ -2,6 +2,8 @@
 #include "CppUnitTest.h"
 #include "../io/FileRW.h"
 #include "../io/UserData.h"
+#include "../io/Account.h"
+#include "../io/Message.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -10,7 +12,15 @@ namespace UnitTest1
 	TEST_CLASS(UserdataTest)
 	{
 	public:
-		
+		TEST_METHOD(UserdataConstructorTest)
+		{
+			Userdata u("abc", "def");
+
+			bool test1 = (u.username == "abc") ? true : false;
+			bool test2 = (u.password == "def") ? true : false;
+
+			Assert::IsTrue(test1 && test2);
+		}
 		TEST_METHOD(UserdataEmptyTest)
 		{
 			Userdata u;
@@ -56,6 +66,45 @@ namespace UnitTest1
 			bool test = FileRW::isStringInLine(test1, test2);
 
 			Assert::IsFalse(test);
+		}
+	};
+
+	TEST_CLASS(AccountTest)
+	{
+		TEST_METHOD(isDataValidTest)
+		{
+			Userdata u("abc", "defghi");
+
+			bool test = Account::isDataValid(u);
+
+			Assert::IsTrue(test);
+		}
+	};
+
+	TEST_CLASS(MessageTest)
+	{
+		TEST_METHOD(MessageConstructorTest)
+		{
+			std::string s = "sender";
+			std::string r = "recipient";
+			std::string m = "message";
+
+			Message msg(s, r, m);
+
+			bool test1 = (msg.sender == s) ? true : false;
+			bool test2 = (msg.recipient == r) ? true : false;
+			bool test3 = (msg.message == m) ? true : false;
+
+			Assert::IsTrue(test1 && test2 && test3);
+		}
+		TEST_METHOD(formatMessageTest)
+		{
+			Message msg("abc", "def", "jkl");
+			std::string expected = "abc;def;jkl\n";
+
+			std::string output = msg.formatMessage();
+
+			Assert::AreEqual(expected, output);
 		}
 	};
 }
