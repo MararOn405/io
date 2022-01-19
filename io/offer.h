@@ -23,11 +23,11 @@ public:
 		cattegory = c;
 		id = g_id;
 
-		insertLine(t, "auctions.txt");
-		insertLine(d, "auctions.txt");
-		insertLine(std::to_string(p), "auctions.txt");
-		insertLine(std::to_string(static_cast<int>(c)), "auctions.txt");
-		insertLine("id: " + std::to_string(id), "auctions.txt");
+		insertLine(t + '\n', "auctions.txt");
+		insertLine(d + '\n', "auctions.txt");
+		insertLine(std::to_string(p) + '\n', "auctions.txt");
+		insertLine(std::to_string(static_cast<int>(c)) + '\n', "auctions.txt");
+		insertLine("id: " + std::to_string(id) + '\n', "auctions.txt");
 
 		g_id++;
 	}

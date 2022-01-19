@@ -133,6 +133,8 @@ logged_in:
 			std::cout << "Podaj tytul: ";
 			std::cin >> title;
 
+			getchar();
+
 			std::cout << "Podaj opis: ";
 			std::getline(std::cin, description);
 
@@ -140,13 +142,14 @@ logged_in:
 			std::cin >> price;
 
 			do {
-				std::cout << "Wybierz kategorie: 0 - elektronika 1 - ubrania 2 - motoryzacja 3 - artykuly chemiczne 4 - artykuly ogrodowe 5 - kosmetyki";
+				std::cout << "Wybierz kategorie: 0 - elektronika 1 - ubrania 2 - motoryzacja 3 - artykuly chemiczne 4 - artykuly ogrodowe 5 - kosmetyki: ";
 				std::cin >> cattegory; 
 			} while(!(cattegory >= 0 && cattegory <= 5));
 
 			Cattegory cat = static_cast<Cattegory>(cattegory);
 
 			seller.addOffer(title, description, price, cat);
+			goto logged_in;
 			break;
 		}
 
@@ -163,6 +166,7 @@ logged_in:
 				std::cout << "Nie jestes wlascicielem aukcji o takim id\n";
 			}
 
+			goto logged_in;
 			break;
 		}
 
@@ -173,6 +177,7 @@ logged_in:
 
 			std::cout << "Twoj kod wysylki pod adres " << adr << " to " << seller.getShippingCode();
 
+			goto logged_in;
 			break;
 		}
 
