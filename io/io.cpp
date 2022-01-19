@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include "Account.h"
 #include "MessageSystem.h"
+#include "seller.h"
 int main()
 {
 main:
@@ -68,9 +69,10 @@ logged_in:
 
 	system("cls");
 	std::cout << "Zalogowano jako " << login_data.username << std::endl;
-	std::cout << "Wybierz akcje\n1 - Wyslij wiadomosc\n2 - Odbierz wiadomosci\n9 - Wyloguj sie\n0 - Wyjdz z programu\n";
+	std::cout << "Wybierz akcje\n1 - Wyslij wiadomosc\n2 - Odbierz wiadomosci\n3 - Dodaj aukcje\n4 - Usun aukcje\n5 - Wyslij przedmiot ze swojej aukcji\n9 - Wyloguj sie\n0 - Wyjdz z programu\n";
 	std::cin >> action;
 	Message msg;
+	Seller seller;
 	std::vector<std::string> messages;
 	try
 	{
@@ -124,6 +126,55 @@ logged_in:
 			}
 			goto logged_in;
 			break;
+
+		case 3: {
+			std::string title, description; double price; int cattegory;
+
+			std::cout << "Podaj tytul: ";
+			std::cin >> title;
+
+			std::cout << "Podaj opis: ";
+			std::getline(std::cin, description);
+
+			std::cout << "Podaj cene: ";
+			std::cin >> price;
+
+			do {
+				std::cout << "Wybierz kategorie: 0 - elektronika 1 - ubrania 2 - motoryzacja 3 - artykuly chemiczne 4 - artykuly ogrodowe 5 - kosmetyki";
+				std::cin >> cattegory; 
+			} while(!(cattegory >= 0 && cattegory <= 5));
+
+			Cattegory cat = static_cast<Cattegory>(cattegory);
+
+			seller.addOffer(title, description, price, cat);
+			break;
+		}
+
+		case 4: {
+			std::cout << "Podaj id aukcji ktora chcesz usunac: ";
+			int id;
+			std::cin >> id;
+
+			if(seller.removeOffer(id)) {
+				std::cout << "Aukcja usunieta pomyslnie\n";
+			}
+
+			else {
+				std::cout << "Nie jestes wlascicielem aukcji o takim id\n";
+			}
+
+			break;
+		}
+
+		case 5: {
+			std::cout << "Podaj adres wysylki: ";
+			std::string adr;
+			std::getline(std::cin, adr);
+
+			std::cout << "Twoj kod wysylki pod adres " << adr << " to " << seller.getShippingCode();
+
+			break;
+		}
 
 		case 9:
 			goto main;
