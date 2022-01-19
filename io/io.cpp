@@ -129,11 +129,10 @@ logged_in:
 
 		case 3: {
 			std::string title, description; double price; int cattegory;
+			getchar();
 
 			std::cout << "Podaj tytul: ";
-			std::cin >> title;
-
-			getchar();
+			std::getline(std::cin, title);
 
 			std::cout << "Podaj opis: ";
 			std::getline(std::cin, description);
@@ -149,6 +148,10 @@ logged_in:
 			Cattegory cat = static_cast<Cattegory>(cattegory);
 
 			seller.addOffer(title, description, price, cat);
+
+			std::cout << "Aukcja utworzona pomyslnie.";
+			system("pause");
+
 			goto logged_in;
 			break;
 		}
@@ -159,12 +162,14 @@ logged_in:
 			std::cin >> id;
 
 			if(seller.removeOffer(id)) {
-				std::cout << "Aukcja usunieta pomyslnie\n";
+				std::cout << "Aukcja usunieta pomyslnie";
 			}
 
 			else {
-				std::cout << "Nie jestes wlascicielem aukcji o takim id\n";
+				std::cout << "Nie jestes wlascicielem aukcji o takim id";
 			}
+
+			system("pause");
 
 			goto logged_in;
 			break;
@@ -176,6 +181,7 @@ logged_in:
 			std::getline(std::cin, adr);
 
 			std::cout << "Twoj kod wysylki pod adres " << adr << " to " << seller.getShippingCode();
+			system("pause");
 
 			goto logged_in;
 			break;
