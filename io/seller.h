@@ -19,11 +19,9 @@ public:
 
 	bool removeOffer(int id) {
 		for(int i = 0; i < offers.size(); i++) {
-			if(offers[i].getId() == id) {
 				offers[i].remove();
 				offers.erase(offers.begin() + i);
 				return true;
-			}
 		}
 
 		return false;

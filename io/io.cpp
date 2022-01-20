@@ -86,10 +86,10 @@ logged_in:
 			getchar();
 
 			std::cout << "Wpisz nazwe uzytkownika odbiorcy:\n";
-			std::getline(std::cin, msg.recipient);
+			std::cin >> msg.recipient;
 
 			std::cout << "Wpisz wiadomosc:\n";
-			std::getline(std::cin, msg.message);
+			std::cin >> msg.message;
 
 			msg.sender = login_data.username;
 			if (MessageSystem::sendMessage(msg))
@@ -171,11 +171,11 @@ logged_in:
 			std::cin >> id;
 
 			if(seller.removeOffer(id)) {
-				std::cout << "Aukcja usunieta pomyslnie\n";
+				std::cout << "Aukcja usunieta pomyslnie";
 			}
 
 			else {
-				std::cout << "Nie jestes wlascicielem aukcji o takim id\n";
+				std::cout << "Nie jestes wlascicielem aukcji o takim id";
 			}
 
 			system("pause");
@@ -188,9 +188,11 @@ logged_in:
 			std::cout << "Podaj adres wysylki: ";
 			std::string adr;
 			std::getline(std::cin, adr);
+			getchar();
 
-			std::cout << "Twoj kod wysylki pod adres " << adr << " to " << seller.getShippingCode() << std::endl;
+			std::cout << "Twoj kod wysylki pod adres " << adr << " to " << seller.getShippingCode();
 			system("pause");
+			getchar();
 
 			goto logged_in;
 			break;
