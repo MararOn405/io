@@ -21,7 +21,7 @@ public:
 			std::string line;
 			while (file >> line)
 			{
-				if (content.find(content) != std::string::npos)
+				if (isStringInLine(content, line))
 				{
 					file.close();
 					return true;
@@ -75,7 +75,7 @@ public:
 			std::string line;
 			while (file >> line)
 			{
-				if (!isStringInLine(line, content)) temp << line << std::endl;
+				if (!isStringInLine(content, line)) temp << line << std::endl;
 			}
 		}
 		temp.close();

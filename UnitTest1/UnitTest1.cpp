@@ -38,7 +38,7 @@ namespace UnitTest1
 		TEST_METHOD(formatUserData)
 		{
 			Userdata u("abc", "asd");
-			std::string test = "abc;asd\n";
+			std::string test = "abc;asd";
 
 			std::string output = u.formatUserdata();
 
@@ -100,7 +100,7 @@ namespace UnitTest1
 		TEST_METHOD(formatMessageTest)
 		{
 			Message msg("abc", "def", "jkl");
-			std::string expected = "abc;def;jkl\n";
+			std::string expected = "abc;def;jkl";
 
 			std::string output = msg.formatMessage();
 

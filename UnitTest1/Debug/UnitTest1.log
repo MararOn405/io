@@ -1,2 +1,4 @@
-﻿  UnitTest1.cpp
-  UnitTest1.vcxproj -> C:\Users\Filip\source\repos\io\io\Debug\UnitTest1.dll
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: Katalog pośredni (Debug\) zawiera pliki udostępnione z innego projektu (UnitTest1.vcxproj). Może to spowodować niepoprawne zachowanie podczas oczyszczania i ponownej kompilacji.
+  UnitTest1.cpp
+     Trwa tworzenie biblioteki C:\Users\Filip\source\repos\io\io\Debug\UnitTest.lib i obiektu C:\Users\Filip\source\repos\io\io\Debug\UnitTest.exp
+  UnitTest1.vcxproj -> C:\Users\Filip\source\repos\io\io\Debug\UnitTest.dll

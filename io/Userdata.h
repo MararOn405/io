@@ -22,7 +22,7 @@ public:
 
 	std::string formatUserdata()
 	{
-		return username + ";" + password + "\n";
+		return username + ";" + password;
 	}
 };
 

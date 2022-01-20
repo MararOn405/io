@@ -83,10 +83,14 @@ logged_in:
 			exit(0);
 
 		case 1:
+			getchar();
+
 			std::cout << "Wpisz nazwe uzytkownika odbiorcy:\n";
-			std::cin >> msg.recipient;
+			std::getline(std::cin, msg.recipient);
+
 			std::cout << "Wpisz wiadomosc:\n";
-			std::cin >> msg.message;
+			std::getline(std::cin, msg.message);
+
 			msg.sender = login_data.username;
 			if (MessageSystem::sendMessage(msg))
 			{
@@ -101,7 +105,7 @@ logged_in:
 			messages = MessageSystem::getUserMessages(login_data.username);
 			if (messages.size() == 0)
 			{
-				std::cout << "Brak wiadomosci.";
+				std::cout << "Brak wiadomosci.\n";
 				system("pause");
 				goto logged_in;
 			}
@@ -112,11 +116,16 @@ logged_in:
 				std::cout << "Wiadomosc " << i+1 << " z " << messages.size() << "\n";
 				std::cout << "Nadawca: " << msg.sender << std::endl;
 				std::cout << "Tresc: " << msg.message << std::endl;
-				std::cout << "1 - Nastepna wiadomosc\nDowolny przycisk - Wyjdz z wiadomosci\n";
+				std::cout << "1 - Nastepna wiadomosc\n2 - Usun wiadomosc\nDowolny przycisk - Wyjdz z wiadomosci\n";
 				std::cin >> action;
 				switch (action)
 				{
 				case 1:
+					continue;
+					break;
+				case 2:
+					if(MessageSystem::deleteMessage(msg)) std::cout << "Pomyslnie usunieto wiadomosc.\n";
+					system("pause");
 					continue;
 					break;
 				default:
@@ -149,7 +158,7 @@ logged_in:
 
 			seller.addOffer(title, description, price, cat);
 
-			std::cout << "Aukcja utworzona pomyslnie.";
+			std::cout << "Aukcja utworzona pomyslnie.\n";
 			system("pause");
 
 			goto logged_in;
@@ -162,11 +171,11 @@ logged_in:
 			std::cin >> id;
 
 			if(seller.removeOffer(id)) {
-				std::cout << "Aukcja usunieta pomyslnie";
+				std::cout << "Aukcja usunieta pomyslnie\n";
 			}
 
 			else {
-				std::cout << "Nie jestes wlascicielem aukcji o takim id";
+				std::cout << "Nie jestes wlascicielem aukcji o takim id\n";
 			}
 
 			system("pause");
@@ -180,7 +189,7 @@ logged_in:
 			std::string adr;
 			std::getline(std::cin, adr);
 
-			std::cout << "Twoj kod wysylki pod adres " << adr << " to " << seller.getShippingCode();
+			std::cout << "Twoj kod wysylki pod adres " << adr << " to " << seller.getShippingCode() << std::endl;
 			system("pause");
 
 			goto logged_in;

@@ -21,13 +21,13 @@ public:
 		int pos1 = formatted.find_first_of(";");
 		int pos2 = formatted.find_last_of(";");
 		sender = formatted.substr(0, pos1);
-		recipient = formatted.substr(pos1 + 1, pos2);
+		recipient = formatted.substr(pos1+1, pos2-pos1-1);
 		message = formatted.substr(pos2 + 1);
 	}
 
 	std::string formatMessage()
 	{
-		return sender + ";" + recipient + ";" + message + "\n";
+		return sender + ";" + recipient + ";" + message;
 	}
 
 };
