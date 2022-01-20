@@ -161,14 +161,8 @@ logged_in:
 			int id;
 			std::cin >> id;
 
-			if(seller.removeOffer(id)) {
-				std::cout << "Aukcja usunieta pomyslnie";
-			}
-
-			else {
-				std::cout << "Nie jestes wlascicielem aukcji o takim id";
-			}
-
+			seller.removeOffer(id);
+			std::cout << "Aukcja usunieta pomyslnie";
 			system("pause");
 
 			goto logged_in;
@@ -179,9 +173,11 @@ logged_in:
 			std::cout << "Podaj adres wysylki: ";
 			std::string adr;
 			std::getline(std::cin, adr);
+			getchar();
 
-			std::cout << "Twoj kod wysylki pod adres " << adr << " to " << seller.getShippingCode();
+			std::cout << "Twoj kod wysylki to " << seller.getShippingCode();
 			system("pause");
+			getchar();
 
 			goto logged_in;
 			break;
