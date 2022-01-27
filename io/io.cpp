@@ -201,7 +201,12 @@ logged_in:
 		}
 
 		case 6: {
-			ShowItem();
+			do {
+				std::cout << "Wybierz kategorie: 0 - elektronika 1 - ubrania 2 - motoryzacja 3 - artykuly chemiczne 4 - artykuly ogrodowe 5 - kosmetyki: ";
+				std::cin >> cattegory;
+			}
+
+			ShowItem(cattegory);
 
 			system("pause");
 			goto logged_in;

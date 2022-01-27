@@ -16,7 +16,7 @@ public:
 
     }
 
-    void ShowItem()
+    void ShowItem(std::Cattegory cattegory)
     {
         std::string line;
         std::fstream file;
