@@ -2,6 +2,8 @@
 #include "Account.h"
 #include "MessageSystem.h"
 #include "seller.h"
+#include "buyer.h"
+
 int main()
 {
 main:
@@ -69,7 +71,7 @@ logged_in:
 
 	system("cls");
 	std::cout << "Zalogowano jako " << login_data.username << std::endl;
-	std::cout << "Wybierz akcje\n1 - Wyslij wiadomosc\n2 - Odbierz wiadomosci\n3 - Dodaj aukcje\n4 - Usun aukcje\n5 - Wyslij przedmiot ze swojej aukcji\n9 - Wyloguj sie\n0 - Wyjdz z programu\n";
+	std::cout << "Wybierz akcje\n1 - Wyslij wiadomosc\n2 - Odbierz wiadomosci\n3 - Dodaj aukcje\n4 - Usun aukcje\n5 - Wyslij przedmiot ze swojej aukcji\n6 - Pokaz aukcje\n7 - Zakup przedmiot\n9 - Wyloguj sie\n0 - Wyjdz z programu\n";
 	std::cin >> action;
 	Message msg;
 	Seller seller;
@@ -194,6 +196,33 @@ logged_in:
 			system("pause");
 			getchar();
 
+			goto logged_in;
+			break;
+		}
+
+		case 6: {
+			ShowItem();
+
+			system("pause");
+			goto logged_in;
+			break;
+
+		}
+
+		case 7: {
+			std::cout << "Podaj numer id aukcji ktora chcesz zakupic: ";
+			int id;
+			std::cin >> id;
+
+			buyer.BuyItem(id);
+
+			std::cout << "Podaj adres wysylki: ";
+			std::string adr;
+			std::getline(std::cin, adr);
+			getchar();
+
+			std::cout << "Przedmiot zostal zakupiony, przejdz do platnosci kontaktujac sie ze sprzedawca" << endl; 
+			system("pause");
 			goto logged_in;
 			break;
 		}
